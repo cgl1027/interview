@@ -2,14 +2,15 @@
 #define QIHOO_INI_PARSER_H_
 
 #include <string>
+#include <map>
 
 namespace qh
 {
     class INIParser
     {
     public:
-        INIParser();
-        ~INIParser();
+        INIParser(){}
+        ~INIParser(){}
 
         //! \brief 解析一个磁盘上的INI文件
         //! \param[in] - const std::string & ini_file_path
@@ -37,6 +38,27 @@ namespace qh
         const std::string& Get(const std::string& section, const std::string& key, bool* found);
 
     private:
+		/*
+			findNextSeper用于找到下一个分割点，返回下一个分割点字符串起始位置坐标
+			ini_data:输入的数据
+			pos: 在输入的数据中开始查找的位置
+			seperator: 分割数据的字符串
+		*/
+		size_t findNextSeper(const std::string& ini_data, size_t pos, const std::string& seperator);
+
+		/*
+			在只有key和value的字符串中分割key和value
+			key_val: 经过切割后只含有key和value的字符串
+			mulmap: map容器，用于存放分割后得到的key和对应的value
+			key_val_seperator: 分割key和val的字符串
+		*/
+		void splitKeyVal(const std::string& key_val,\
+						 std::map<std::string,std::string>& mulmap,\
+						 const std::string& key_val_seperator);
+
+		std::map<std::string, std::string> keyVal_map_;               //保存key和value的值
+		std::string ini_data_;										  //保存初始的字符串数据
+		const std::string empty_str_;								  //Get函数获取不到key时的空字符串引用
     };
 }
 
