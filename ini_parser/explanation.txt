@@ -1,0 +1,6 @@
+    解析的整体思想为首先利用findNextSeper向后寻找最近的一个行分隔符，
+
+找到后处理此分隔符之前的数据，利用splitKeyVal函数从中提取出key和value
+
+，并存入map容器中，以便于Get函数的查找。因此Parse函数时间复杂度为O(n)
+。
