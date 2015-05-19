@@ -1,0 +1,10 @@
+    算法实现依赖StringSplit函数，第一次遍历首先将字符串根据行分隔符
+
+分割成key_value对，并将这些存入一个string容器中。第二次遍历从容器中依
+
+次取出key_value对，再次调用StringSplit函数，利用key、value分隔符，分割
+
+出key和value再次存入容器，如果是需要查找的key则，判断其value。
+
+时间复杂度：O(n)
+空间复杂度：O(n)
