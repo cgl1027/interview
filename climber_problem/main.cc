@@ -36,10 +36,10 @@ void CreateMountVec(vector<Mountain>& mount, const char* pos, int num)
 
 int resolve(const char* input)
 {
-	int hori_dist = 0;
-	int pre_height = 0;
-	int mount_begin = -1;
-	int mount_end = -1;
+	int hori_dist = 0;		//水平移动距离
+	int pre_height = 0;		//前一座山高度
+	int mount_begin = -1;		//连续山脉的起始位置
+	int mount_end = -1;		//连续山脉的终止位置
 	int res = 0;
 	const char* pos = input;
 	int num;
