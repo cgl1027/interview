@@ -2,6 +2,7 @@
 #include "proxy_url_extractor.h"
 #include <fstream>
 #include <vector>
+#include <limits.h>
 #include "tokener.h"
 
 namespace qh
@@ -100,6 +101,32 @@ namespace qh
     {
 #if 1
         //TODO 请面试者在这里添加自己的代码实现以完成所需功能
+	Tokener token(raw_url);
+		token.skipTo('?');
+		token.next(); //skip one char : '?' 
+
+		std::string str_key_val = raw_url.substr(token.getCurPos());
+
+		std::vector<std::string> split_byAnd;
+		std::vector<std::string> key_val;
+		StringSplit(str_key_val, '&', INT_MAX, split_byAnd);  //利用StringSplit首先找出key_value对，存入容器
+
+		int len = split_byAnd.size();
+
+		for(int i = 0; i < len; ++i)			      //从容器中取出key_value对
+		{						      //再分别分割成key和value
+
+			StringSplit(split_byAnd[i], '=', 2, key_val);
+
+			if (keys.find(key_val[0]) != keys.end())
+			{
+				if(key_val.size() < 2) return;
+				sub_url = key_val[1];
+				return;
+			}
+
+			key_val.clear();
+		}
 #else
         //这是一份参考实现，但在特殊情况下工作不能符合预期
         Tokener token(raw_url);
