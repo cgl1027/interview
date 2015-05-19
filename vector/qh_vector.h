@@ -62,14 +62,14 @@ namespace qh
     private:
         T*      data_;
         size_t  size_;                          //data_的有效数据大小
-		size_t  capacity_;		//data_的实际容量大小
+	size_t  capacity_;			//data_的实际容量大小
 
-		size_t DoubleSize(size_t s)     //用于计算capacity_, capacity_总是大于等于有效数据个数的
-		{				//2的整数幂，从而防止push_back()时频繁复制数据
-			size_t res = 0x1;
-			while(res < s) res <<= 1;
-			return res;
-		}
+	size_t DoubleSize(size_t s)     	//用于计算capacity_, capacity_总是大于等于有效数据个数的
+	{					//2的整数幂，从而防止push_back()时频繁复制数据
+		size_t res = 0x1;
+		while(res < s) res <<= 1;
+		return res;
+	}
     };
 
 	template<class T>
